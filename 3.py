@@ -1,7 +1,7 @@
 import sys
 
 status = True
-user_input = "2++12--3"
+user_input = sys.argv[1]
 #copy all parameters except file name to object
 input_len= len(user_input)
 #getting lenght of user input 
