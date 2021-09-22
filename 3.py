@@ -1,38 +1,30 @@
 import sys
+#required for argv - list of parameters
 
-status = True
-user_input = sys.argv[1]
-#copy all parameters except file name to object
-input_len= len(user_input)
-#getting lenght of user input 
-print(user_input)
-if user_input:
-    #checking if there is a string 
-    for x in range(input_len):
-        if(user_input[x].isalpha() or not (user_input[x].isnumeric()) and not (user_input[x]==('+' or '-'))):
-            #cheking if there is an alphabetic symbol, or any other except the numbers and arifmetic operators
-            status = False
-            break
-        elif((user_input[x]==('+' or '-')) and x==input_len-1):
-            #cheking if there is an operation symbol in the end of the string
-            status = False
-            break
-        elif((x==0 or user_input[x-1]==('+' or '-')) and user_input[x]=='0'):
-            #checking if there is a number starting with 0
-            status = False
-            break
-        elif((user_input[x] == ('+' or '-')) and (user_input[x+1] == ('+' or '-'))):
-            #checking if there is an operation number near another one
-            status = False
-            break
-        
+def check(string, curr_pos):
+    """Checks whether the input string is the correct entry for the 'formula' according EBNF syntax"""
+    if not string[curr_pos].isdigit() and (string[curr_pos] not in oper_list or string[curr_pos-1] in oper_list):
+        return False
+    elif not curr_pos:
+        if string[len(string)-1] not in oper_list:
+            return True
+    else:
+        return check(string, curr_pos-1)
+
+user_input = sys.argv[1:]
+#parametr list
+oper_list = ['+', '-']
+#list of operation signs
+
+if not user_input:
+#check if there is an input
+    print("No parameters")
 else:
-    status = False
-
-if(status):
-    #forming the result
-    result = (status, eval(user_input))
-else:
-    result = (status, None)
-
-print(result)
+    user_input_str = "".join(user_input)
+    #converting a list of parameters into string
+    if check(user_input_str, len(user_input_str)-1):
+        #if string is correct, printing the answer
+        #else, printing the "False" message
+        print("True", eval(user_input_str), sep=", ")
+    else:
+        print("False, None")
