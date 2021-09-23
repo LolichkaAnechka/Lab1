@@ -21,6 +21,6 @@ else:
     except ValueError:
         print("Input error (Value error)")
     except KeyError:
-        print("Incorrect input! The first argument should be: add, div, multi or sub")
+        print("Incorrect input! The first argument should be: add, div, mul or sub")
     except ZeroDivisionError:
         print("Division by zero")
