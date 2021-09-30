@@ -17,7 +17,8 @@ def knapsack(knap_cap, weight):
 
             else:
                 subp_list[index][value] = subp_list[index - 1][value]
-            # taking the value from the previous row if the weight of a bar is higher than the value we consider now
+            # taking the value from the previous row if the weight of a bar is higher than the value we consider no
+            print(subp_list)
     return subp_list[numb_of_bars][knap_cap]
     # returning the value in the very end of subproblem list that will be the solution
 
